@@ -76,7 +76,7 @@ def unauthorize(update, context):
             AUTHORIZED_CHATS.remove(chat_id)
         else:
             msg = '𝐂𝐡𝐚𝐭 𝐀𝐥𝐫𝐞𝐚𝐝𝐲 𝐔𝐧𝐚𝐮𝐭𝐡𝐨𝐫𝐢𝐳𝐞𝐝!☠️'
-                    
+
     sendMessage(msg, context.bot, update.message)
 
 def addSudo(update, context):
@@ -111,25 +111,19 @@ def removeSudo(update, context):
     if len(context.args) == 1:
         user_id = int(context.args[0])
         if user_id in SUDO_USERS:
-            if DB_URI is not None:
-                msg = DbManger().user_rmsudo(user_id)
-            else:
-                msg = '𝐃𝐞𝐦𝐨𝐭𝐞𝐝 😅'
+            msg = DbManger().user_rmsudo(user_id) if DB_URI is not None else '𝐃𝐞𝐦𝐨𝐭𝐞𝐝 😅'
             SUDO_USERS.remove(user_id)
         else:
             msg = '𝐍𝐨𝐭 𝐬𝐮𝐝𝐨 𝐮𝐬𝐞𝐫 𝐭𝐨 𝐝𝐞𝐦𝐨𝐭𝐞! 😅'
-    elif reply_message:    
+    elif reply_message:
         user_id = reply_message.from_user.id
         if user_id in SUDO_USERS:
-            if DB_URI is not None:
-                msg = DbManger().user_rmsudo(user_id)
-            else:
-                msg = '𝐃𝐞𝐦𝐨𝐭𝐞𝐝 💌'
+            msg = DbManger().user_rmsudo(user_id) if DB_URI is not None else '𝐃𝐞𝐦𝐨𝐭𝐞𝐝 💌'
             SUDO_USERS.remove(user_id)
         else:
             msg = '𝐍𝐨𝐭 𝐬𝐮𝐝𝐨 𝐮𝐬𝐞𝐫 𝐭𝐨 𝐝𝐞𝐦𝐨𝐭𝐞! 💌'
     else:
-        msg = "𝐆𝐢𝐯𝐞 𝐈𝐃 𝐨𝐫 𝐑𝐞𝐩𝐥𝐲 𝐓𝐨 𝐦𝐞𝐬𝐬𝐚𝐠𝐞 𝐨𝐟 𝐰𝐡𝐨𝐦 𝐲𝐨𝐮 𝐰𝐚𝐧𝐭 𝐭𝐨 𝐫𝐞𝐦𝐨𝐯𝐞 𝐟𝐫𝐨𝐦 𝐒𝐮𝐝𝐨"        
+        msg = "𝐆𝐢𝐯𝐞 𝐈𝐃 𝐨𝐫 𝐑𝐞𝐩𝐥𝐲 𝐓𝐨 𝐦𝐞𝐬𝐬𝐚𝐠𝐞 𝐨𝐟 𝐰𝐡𝐨𝐦 𝐲𝐨𝐮 𝐰𝐚𝐧𝐭 𝐭𝐨 𝐫𝐞𝐦𝐨𝐯𝐞 𝐟𝐫𝐨𝐦 𝐒𝐮𝐝𝐨"
     sendMessage(msg, context.bot, update.message)
 
 def sendAuthChats(update, context):
